@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using TabloidCLI.Models;
+using TabloidCLI.Repositories;
 
 namespace TabloidCLI.Repositories
 {
@@ -11,7 +12,38 @@ namespace TabloidCLI.Repositories
 
         public List<Post> GetAll()
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT id,
+                                               Title,
+                                               Url,
+                                               PublishDateTime,
+                                               
+                                          FROM Post";
+
+                    List<Post> posts = new List<Post>();
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Post post = new Post()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Title = reader.GetString(reader.GetOrdinal("Title")),
+                            Url = reader.GetString(reader.GetOrdinal("Url")),
+                            PublishDateTime = reader.GetDateTime(reader.GetOrdinal("PublishDateTime"))
+                        };
+                        posts.Add(post);
+                    }
+
+                    reader.Close();
+
+                    return posts;
+                }
+            }
         }
 
         public Post Get(int id)
@@ -97,16 +129,15 @@ namespace TabloidCLI.Repositories
                     post.Id = id;
                 }
             }
-
-            //public void Update(Post post)
-            //{
-            //    throw new NotImplementedException();
-            //}
-
-            //public void Delete(int id)
-            //{
-            //    throw new NotImplementedException();
-            //}
         }
+            public void Update(Post post)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Delete(int id)
+            {
+                throw new NotImplementedException();
+            }
     }
 }
