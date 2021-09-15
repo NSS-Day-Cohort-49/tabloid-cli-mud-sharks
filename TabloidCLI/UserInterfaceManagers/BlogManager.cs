@@ -102,7 +102,11 @@ namespace TabloidCLI.UserInterfaceManagers
             catch (Exception ex)
             {
                 Console.WriteLine("Invalid Selection");
+<<<<<<< HEAD
                 Choose();
+=======
+                return null;
+>>>>>>> main
             }
         }
         private void Remove()
