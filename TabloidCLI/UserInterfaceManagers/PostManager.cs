@@ -8,11 +8,11 @@ using System.Linq;
 namespace TabloidCLI.UserInterfaceManagers
 {
      public class PostManager : IUserInterfaceManager
-    {
-
+     {
         private readonly IUserInterfaceManager _parentUI;
         private PostRepository _postRepository;
         private string _connectionString;
+
         public PostManager(IUserInterfaceManager parentUI, string connectionString)
         {
             _parentUI = parentUI;
@@ -51,5 +51,5 @@ namespace TabloidCLI.UserInterfaceManagers
                     return this;
             }
         }
-    }
+     }
 }
