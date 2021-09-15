@@ -157,10 +157,10 @@ namespace TabloidCLI.UserInterfaceManagers
         }
         private void Remove()
         {
-            Author postToDelete = Choose("Which post would you like to remove?");
+            Post postToDelete = Choose("Which post would you like to remove?");
             if (postToDelete != null)
             {
-                _authorRepository.Delete(postToDelete.Id);
+                _postRepository.Delete(postToDelete.Id);
             }
         }
     }
