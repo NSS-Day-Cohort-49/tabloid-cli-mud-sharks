@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
+using TabloidCLI.Models;
 using TabloidCLI.Repositories;
 
 namespace TabloidCLI.UserInterfaceManagers
 {
-    class JournalManager : IUserInterfaceManager
+    public class JournalManager : IUserInterfaceManager
     {
         private readonly IUserInterfaceManager _parentUI;
         private JournalRepository _journalRepository;
@@ -35,6 +37,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     return this;
                 case "2":
                     Console.Clear();
+                    Add();
                     return this;
                 case "3":
                     Console.Clear();
@@ -49,6 +52,23 @@ namespace TabloidCLI.UserInterfaceManagers
                     Console.WriteLine("Invalid Selection");
                     return this;
             }
+        }
+
+        private void Add()
+        {
+            Console.WriteLine("New Journal Entry");
+            Journal journal = new Journal();
+
+            Console.Write("Journal Title: ");
+            journal.Title = Console.ReadLine();
+
+            Console.Write("Journal Content: ");
+            journal.Content = Console.ReadLine();
+
+            journal.CreateDateTime = DateTime.Today;
+            Console.Write($"The Journal entry was created on {journal.CreateDateTime} ");
+
+            _journalRepository.Insert(journal);
         }
     }
 }
