@@ -11,12 +11,16 @@ namespace TabloidCLI.UserInterfaceManagers
      {
         private readonly IUserInterfaceManager _parentUI;
         private PostRepository _postRepository;
+        private AuthorRepository _authorRepository;
+        private BlogRepository _blogRepository;
         private string _connectionString;
 
         public PostManager(IUserInterfaceManager parentUI, string connectionString)
         {
             _parentUI = parentUI;
             _postRepository = new PostRepository(connectionString);
+            _authorRepository = new AuthorRepository(connectionString);
+            _blogRepository = new BlogRepository(connectionString);
             _connectionString = connectionString;
         }
         public IUserInterfaceManager Execute()
@@ -35,12 +39,19 @@ namespace TabloidCLI.UserInterfaceManagers
             switch (choice)
             {
                 case "1":
+                    List();
                     return this;
                 case "2":
+                    Console.Clear();
+                    Add();
                     return this;
                 case "3":
+                    Console.Clear();
+                    Edit();
                     return this;
                 case "4":
+                    Console.Clear();
+                    Remove();
                     return this;
                 case "5":
                     return this;
@@ -51,5 +62,68 @@ namespace TabloidCLI.UserInterfaceManagers
                     return this;
             }
         }
-     }
+
+        private void List()
+        {
+            List<Post> posts = _postRepository.GetAll();
+            foreach (Post post in posts)
+            {
+                Console.WriteLine(post.Title);
+            }
+        }
+
+        private void ListAuthors()
+        {
+            List<Author> authors = _authorRepository.GetAll();
+            foreach (Author author in authors)
+            {
+                Console.WriteLine();
+                Console.WriteLine($"{author.Id}-{author.FirstName}");
+            }
+        }
+
+        private void ListBlogs()
+        {
+            List<Blog> blogs = _blogRepository.GetAll();
+            foreach (Blog blog in blogs)
+            {
+                Console.WriteLine();
+                Console.WriteLine($"{blog.Id}-{blog.Title}");
+            }
+        }
+        private void Add()
+        {
+            Console.WriteLine("New Post");
+            Post post = new Post() 
+            {Author = new Author(), Blog = new Blog() };
+
+            Console.Write("Title: ");
+            post.Title = Console.ReadLine();
+
+            Console.Write("Url: ");
+            post.Url = Console.ReadLine();
+
+            Console.Write("Who Wrote This: ");
+            ListAuthors();
+            post.Author.Id = int.Parse (Console.ReadLine());
+
+            Console.Write("What Blog Is This For: ");
+            ListBlogs();
+            post.Blog.Id = int.Parse(Console.ReadLine());
+
+            post.PublishDateTime = DateTime.UtcNow;
+            Console.Write($"The Journal entry was created on {post.PublishDateTime} ");
+            _postRepository.Insert(post);
+
+            Console.Clear();
+        }
+        private void Edit()
+        {
+            throw new NotImplementedException();
+        }
+        private void Remove()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
