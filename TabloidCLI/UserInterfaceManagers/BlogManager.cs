@@ -68,6 +68,18 @@ namespace TabloidCLI.UserInterfaceManagers
                 Console.WriteLine(blog);
             }
         }
+
+       /* private Blog Choose(string prompt = null)
+        {
+            if (prompt == null)
+            {
+                prompt = "Please choose a Blog:";
+            }
+        }*/
+/*        private void Remove()
+        {
+            Blog blogToDelete = Choose("");
+        }*/
         
 
     }
