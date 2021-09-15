@@ -31,6 +31,7 @@ namespace TabloidCLI.UserInterfaceManagers
             switch (choice)
             {
                 case "1":
+                    List();
                     return this;
                 case "2":
                     Console.Clear();
@@ -58,5 +59,15 @@ namespace TabloidCLI.UserInterfaceManagers
             _blogRepository.Insert(blog);
             Console.Clear();
         }
+        private void List()
+        {
+            List<Blog> blogs = _blogRepository.GetAll();
+            foreach (Blog blog in blogs)
+            {
+                Console.WriteLine(blog);
+            }
+        }
+        
+
     }
 }
