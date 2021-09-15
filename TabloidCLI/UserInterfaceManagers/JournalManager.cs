@@ -32,8 +32,8 @@ namespace TabloidCLI.UserInterfaceManagers
             string choice = Console.ReadLine();
             switch (choice)
             {
-                case "1":
-                    Console.Clear();
+                case "1": 
+                    List();
                     return this;
                 case "2":
                     Console.Clear();
@@ -52,6 +52,15 @@ namespace TabloidCLI.UserInterfaceManagers
                     Console.WriteLine("Invalid Selection");
                     return this;
             }
+        }
+
+        private void List()
+        {
+            List<Journal> journals = _journalRepository.GetAll();
+            foreach (Journal journal in journals)
+            {
+                Console.WriteLine($"{journal.Title}, {journal.CreateDateTime}, {journal.Content}");
+            }    
         }
 
         private void Add()
