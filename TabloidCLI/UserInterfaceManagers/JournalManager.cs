@@ -67,7 +67,6 @@ namespace TabloidCLI.UserInterfaceManagers
 
             journal.CreateDateTime = DateTime.Today;
             Console.Write($"The Journal entry was created on {journal.CreateDateTime} ");
-
             _journalRepository.Insert(journal);
         }
     }
