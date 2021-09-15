@@ -21,9 +21,11 @@ namespace TabloidCLI.UserInterfaceManagers
 
         public IUserInterfaceManager Execute()
         {
+            Console.WriteLine();
             Console.WriteLine("Blog Menu");
-            Console.WriteLine(" 1) See Blogs");
-            Console.WriteLine(" 2) Add Blog");
+            Console.WriteLine(" 1) See all Blogs");
+            Console.WriteLine(" 2) Add a Blog");
+            Console.WriteLine(" 3) Delete a Blog");
             Console.WriteLine(" 0) Go Back");
 
             Console.Write("> ");
@@ -38,7 +40,12 @@ namespace TabloidCLI.UserInterfaceManagers
                     Console.Clear();
                     Add();
                     return this;
+                case "3":
+                    Console.Clear();
+                    Remove();
+                    return this;
                 case "0":
+                    Console.Clear();
                     return _parentUI;
                 default:
                     Console.WriteLine("Invalid Selection");
@@ -69,18 +76,45 @@ namespace TabloidCLI.UserInterfaceManagers
             }
         }
 
-       /* private Blog Choose(string prompt = null)
+        private Blog Choose(string prompt = null)
         {
             if (prompt == null)
             {
                 prompt = "Please choose a Blog:";
             }
-        }*/
-/*        private void Remove()
+
+            Console.WriteLine(prompt);
+
+            List<Blog> blogs = _blogRepository.GetAll();
+
+            for (int i = 0; i < blogs.Count; i++)
+            {
+                Blog blog = blogs[i];
+                Console.WriteLine($" {i + 1}) {blog.Title}");
+            }
+            Console.Write("> ");
+            string input = Console.ReadLine();
+            try
+            {
+                int choice = int.Parse(input);
+                return blogs[choice - 1];
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Invalid Selection");
+                Choose();
+            }
+        }
+        private void Remove()
         {
-            Blog blogToDelete = Choose("");
-        }*/
-        
+            Blog blogToDelete = Choose("Which blog would you like to remove?");
+            if (blogToDelete != null)
+            {
+                _blogRepository.Delete(blogToDelete.Id);
+
+            }
+        }
+
 
     }
 }
