@@ -64,7 +64,7 @@ namespace TabloidCLI.UserInterfaceManagers
             List<Blog> blogs = _blogRepository.GetAll();
             foreach (Blog blog in blogs)
             {
-                Console.WriteLine(blog);
+                Console.WriteLine("{blog}");
             }
         }
         
