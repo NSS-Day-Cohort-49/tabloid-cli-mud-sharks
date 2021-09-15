@@ -31,7 +31,8 @@ namespace TabloidCLI.UserInterfaceManagers
             string choice = Console.ReadLine();
             switch (choice)
             {
-                case "1": 
+                case "1":
+                    Console.Clear();
                     List();
                     return this;
                 case "2":
@@ -43,6 +44,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     Edit();
                     return this;
                 case "4":
+                    Console.Clear();
                     Remove();
                     return this;
                 case "0":
