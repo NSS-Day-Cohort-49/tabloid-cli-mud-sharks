@@ -21,6 +21,8 @@ namespace TabloidCLI.Repositories
                                                Title,
                                                Url,
                                                PublishDateTime,
+                                               AuthorId,
+                                               BlogId
                                        FROM Post";
 
                     List<Post> posts = new List<Post>();
@@ -116,7 +118,7 @@ namespace TabloidCLI.Repositories
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Room (Title, Url, PublishDateTime, AuthorId, BlogId) 
+                    cmd.CommandText = @"INSERT INTO Post (Title, Url, PublishDateTime, AuthorId, BlogId) 
                                          OUTPUT INSERTED.Id 
                                          VALUES (@title, @url, @publishDateTime, @authorId, @blogId)";
                     cmd.Parameters.AddWithValue("@title", post.Title);

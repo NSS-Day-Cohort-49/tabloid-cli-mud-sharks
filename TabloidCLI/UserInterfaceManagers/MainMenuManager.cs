@@ -37,6 +37,7 @@ namespace TabloidCLI.UserInterfaceManagers
                 default:
                     Console.WriteLine("Invalid Selection");
                     return this;
+
             }
         }
     }
