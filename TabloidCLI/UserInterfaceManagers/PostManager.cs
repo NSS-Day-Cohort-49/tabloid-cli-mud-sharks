@@ -80,7 +80,7 @@ namespace TabloidCLI.UserInterfaceManagers
             foreach (Author author in authors)
             {
                 Console.WriteLine();
-                Console.WriteLine($"{author.Id}-{author.FirstName}");
+                Console.WriteLine($"{author.Id}) {author.FirstName}");
             }
         }
 
@@ -90,7 +90,7 @@ namespace TabloidCLI.UserInterfaceManagers
             foreach (Blog blog in blogs)
             {
                 Console.WriteLine();
-                Console.WriteLine($"{blog.Id}-{blog.Title}");
+                Console.WriteLine($"{blog.Id}) {blog.Title}");
             }
         }
 
