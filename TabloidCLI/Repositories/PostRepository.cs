@@ -17,12 +17,11 @@ namespace TabloidCLI.Repositories
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT id,
+                    cmd.CommandText = @"SELECT Id,
                                                Title,
                                                Url,
                                                PublishDateTime,
-                                               
-                                          FROM Post";
+                                       FROM Post";
 
                     List<Post> posts = new List<Post>();
 
@@ -74,6 +73,7 @@ namespace TabloidCLI.Repositories
                                                LEFT JOIN Blog b on p.BlogId = b.Id 
                                          WHERE p.AuthorId = @authorId";
                     cmd.Parameters.AddWithValue("@authorId", authorId);
+
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     List<Post> posts = new List<Post>();
@@ -124,9 +124,8 @@ namespace TabloidCLI.Repositories
                     cmd.Parameters.AddWithValue("@publishDateTime", post.PublishDateTime);
                     cmd.Parameters.AddWithValue("@authorId", post.Author.Id);
                     cmd.Parameters.AddWithValue("@blogId", post.Blog.Id);
-                    int id = (int)cmd.ExecuteScalar();
 
-                    post.Id = id;
+                    cmd.ExecuteNonQuery();
                 }
             }
         }

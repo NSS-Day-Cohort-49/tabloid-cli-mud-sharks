@@ -13,7 +13,7 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine("Welcome to Mud Shark Tabloid Company");
             Console.WriteLine("Main Menu");
 
-            Console.WriteLine(" 1) Journal Management");
+            Console.WriteLine(" 1) My Journal Management");
             Console.WriteLine(" 2) Blog Management");
             Console.WriteLine(" 3) Author Management");
             Console.WriteLine(" 4) Post Management");

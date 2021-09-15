@@ -12,6 +12,8 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private readonly IUserInterfaceManager _parentUI;
         private PostRepository _postRepository;
+        private AuthorRepository _authorRepository;
+        private BlogRepository _blogRepository;
         private string _connectionString;
         public PostManager(IUserInterfaceManager parentUI, string connectionString)
         {
@@ -35,12 +37,17 @@ namespace TabloidCLI.UserInterfaceManagers
             switch (choice)
             {
                 case "1":
+                    List();
                     return this;
                 case "2":
+                    Console.Clear();
+                    Add();
                     return this;
                 case "3":
+                    Edit();
                     return this;
                 case "4":
+                    Remove();
                     return this;
                 case "5":
                     return this;
@@ -50,6 +57,44 @@ namespace TabloidCLI.UserInterfaceManagers
                     Console.WriteLine("Invalid Selection");
                     return this;
             }
+        }
+
+        private void List()
+        {
+            List<Post> posts = _postRepository.GetAll();
+            foreach (Post post in posts)
+            {
+                Console.WriteLine(post);
+            }
+        }
+        private void Add()
+        {
+            Console.WriteLine("New Post");
+            Post post = new Post() 
+            {Author = new Author()};
+
+            Console.Write("Title: ");
+            post.Title = Console.ReadLine();
+
+            Console.Write("Url: ");
+            post.Url = Console.ReadLine();
+
+            post.PublishDateTime = DateTime.UtcNow;
+            //Console.Write("PublishDateTime: ");
+
+            Console.Write("Who Wrote This: ");
+            post.Author.Id = int.Parse (Console.ReadLine());
+
+            _postRepository.Insert(post);
+            Console.Clear();
+        }
+        private void Edit()
+        {
+            throw new NotImplementedException();
+        }
+        private void Remove()
+        {
+            throw new NotImplementedException();
         }
     }
 }
