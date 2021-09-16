@@ -54,8 +54,20 @@ namespace TabloidCLI.Repositories
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT 
-                                            FROM Post";
+                    cmd.CommandText = @"SELECT p.Id as PostId,
+                                               p.Title,
+                                               p.Url,
+                                               p.PublishDateTime,
+                                               p.AuthorId,
+                                               p.BlogId,
+                                               t.Id as TagId,
+                                               t.Name
+                                            FROM Post p
+                                                LEFT JOIN PostTag pt on pt.PostId = p.Id
+                                                LEFt JOIN Tag t on t.Id = pt.TagId
+                                            WHERE p.id = @id";
+
+                    cmd.Parameters.AddWithValue("@id", id);
                 }
 
             }
