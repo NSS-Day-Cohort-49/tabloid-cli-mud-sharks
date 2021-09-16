@@ -56,7 +56,30 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void List()
         {
+            List<Note> notes = _noteRepository.GetAll();
+            foreach (Note note in notes)
+            {
+                Console.WriteLine(note.Title);
+            }
+        }
 
+        private void Add()
+        {
+            Console.WriteLine("New Note");
+            Note note = new Note()
+            { Post = new Post() };
+
+            Console.Write("Title: ");
+            note.Title = Console.ReadLine();
+
+            Console.Write("Content: ");
+            note.Content = Console.ReadLine();
+
+            note.CreateDateTime = DateTime.Now;
+            Console.WriteLine($"The Note was created on {note.CreateDateTime}");
+            _noteRepository.Insert(note);
+
+            Console.Clear();
         }
     }
 }
