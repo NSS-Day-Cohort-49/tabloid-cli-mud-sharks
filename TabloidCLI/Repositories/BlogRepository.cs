@@ -90,6 +90,8 @@ namespace TabloidCLI.Repositories
 
                     cmd.Parameters.AddWithValue("@title", blog.Title);
                     cmd.Parameters.AddWithValue("@url", blog.Url);
+                    cmd.Parameters.AddWithValue("@id", blog.Id);
+
                     cmd.ExecuteNonQuery();
                 }
             }
