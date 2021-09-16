@@ -50,7 +50,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     RemoveTag();
                     return this;
                 case "4":
-                    ManageNote();
+                    //ManageNote();
                     return this;
                 case "0":
                     return _parentUI;
@@ -86,7 +86,7 @@ namespace TabloidCLI.UserInterfaceManagers
             {
                 int choice = int.Parse(input);
                 Tag tag = tags[choice - 1];
-                _postRepository.InsertTag(post, tag);
+                //_postRepository.InsertTag(post, tag);
             }
             catch (Exception ex)
             {
@@ -99,7 +99,7 @@ namespace TabloidCLI.UserInterfaceManagers
             Post post = _postRepository.Get(_postId);
 
             Console.WriteLine($"Which tag would you like to remove from {post.Title}?");
-            List<Tag> tags = post.Tags;
+            /*List<Tag> tags = post.Tags;
 
             for (int i = 0; i < tags.Count; i++)
             {
@@ -112,7 +112,13 @@ namespace TabloidCLI.UserInterfaceManagers
             try
             {
                 int choice = int.Parse(input);
+                Tag tag = tags[choice - 1];
+                //_postRepository.DeleteTag(post.Id, tag.Id);
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Invalid Selection. Won't remove any tags.");
+            }*/
         }
     }
 }
