@@ -22,5 +22,47 @@ namespace TabloidCLI.UserInterfaceManagers
             _blogId = blogId;
         }
 
+        public IUserInterfaceManager Execute()
+        {
+            Blog blog = _blogRepository.Get(_blogId);
+           
+            Console.WriteLine($"{blog.Title} Details");
+            Console.WriteLine(" 1) View");
+            Console.WriteLine(" 2) Add Tag");
+            Console.WriteLine(" 3) Remove Tag");
+            Console.WriteLine(" 4) View Posts");
+            Console.WriteLine(" 0) Return");
+
+            Console.Write("> ");
+            string choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1":
+                    Console.Clear();
+                    View();
+                    return this;
+                case "2":
+                    return this;
+                case "3":
+                    return this;
+                case "4":
+                    return this;
+                case "0":
+                    return _parentUI;
+                default:
+                    Console.WriteLine("Invalid Selection");
+                    return this;
+            }
+        }
+
+        private void View()
+        {
+            Blog blog = _blogRepository.Get(_blogId);
+            Console.WriteLine($"Title: {blog.Title}");
+            Console.WriteLine($"URL: {blog.Url}");
+            Console.WriteLine();
+        }
+
     }
 }
