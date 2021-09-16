@@ -66,7 +66,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     Remove();
                     return this;
                 case "6":
-                    return this;
+                    return new NoteManager(this, _connectionString);
                 case "0":
                     Console.Clear();
                     return _parentUI;
