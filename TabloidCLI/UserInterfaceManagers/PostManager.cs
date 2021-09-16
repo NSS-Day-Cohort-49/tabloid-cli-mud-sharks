@@ -27,10 +27,11 @@ namespace TabloidCLI.UserInterfaceManagers
         {
             Console.WriteLine("Post Menu");
             Console.WriteLine(" 1) List Posts");
-            Console.WriteLine(" 2) Add Post");
-            Console.WriteLine(" 3) Edit Post");
-            Console.WriteLine(" 4) Remove Post");
-            Console.WriteLine(" 5) Note Management");
+            Console.WriteLine(" 2) Post Details");
+            Console.WriteLine(" 3) Add Post");
+            Console.WriteLine(" 4) Edit Post");
+            Console.WriteLine(" 5) Remove Post");
+            Console.WriteLine(" 6) Note Management");
             Console.WriteLine(" 0) Return To Main Menu");
 
 
@@ -43,18 +44,28 @@ namespace TabloidCLI.UserInterfaceManagers
                     List();
                     return this;
                 case "2":
+                    Post post = Choose();
+                    if (post == null)
+                    {
+                        return this;
+                    }
+                    else
+                    {
+                        return new PostDetailManager(this, _connectionString, post.Id);
+                    }
+                case "3":
                     Console.Clear();
                     Add();
                     return this;
-                case "3":
+                case "4":
                     Console.Clear();
                     Edit();
                     return this;
-                case "4":
+                case "5":
                     Console.Clear();
                     Remove();
                     return this;
-                case "5":
+                case "6":
                     return this;
                 case "0":
                     Console.Clear();
