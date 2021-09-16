@@ -49,7 +49,16 @@ namespace TabloidCLI.Repositories
 
         public Post Get(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT 
+                                            FROM Post";
+                }
+
+            }
         }
 
         public List<Post> GetByAuthor(int authorId)
